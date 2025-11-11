@@ -8,6 +8,7 @@ const StyledMenu = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
 const StyledToggle = styled.button`
   background: none;
   border: none;
@@ -24,6 +25,7 @@ const StyledToggle = styled.button`
     color: var(--color-grey-700);
   }
 `;
+
 const StyledList = styled.ul`
   position: fixed;
   background-color: var(--color-grey-0);
@@ -35,6 +37,7 @@ const StyledList = styled.ul`
   margin: 0;
   list-style: none;
 `;
+
 const StyledButton = styled.button`
   width: 100%;
   text-align: left;
@@ -55,12 +58,7 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function MenusBookings({
-  seeDetails,
-  checkIn,
-  checkOut,
-  onDelete,
-}) {
+export default function Menus({ onEdit, onDuplicate, onDelete }) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const toggleRef = useRef();
@@ -90,37 +88,26 @@ export default function MenusBookings({
       {open &&
         ReactDOM.createPortal(
           <StyledList style={{ top: pos.top, left: pos.left }}>
-            {seeDetails && (
+            {onEdit && (
               <StyledButton
                 onClick={() => {
-                  seeDetails();
+                  onEdit();
                   setOpen(false);
                 }}
               >
                 <HiPencil />
-                Details
+                Edit
               </StyledButton>
             )}
-            {checkIn && (
+            {onDuplicate && (
               <StyledButton
                 onClick={() => {
-                  checkIn();
+                  onDuplicate();
                   setOpen(false);
                 }}
               >
                 <HiSquare2Stack />
-                Check In
-              </StyledButton>
-            )}
-            {checkOut && (
-              <StyledButton
-                onClick={() => {
-                  checkOut();
-                  setOpen(false);
-                }}
-              >
-                <HiSquare2Stack />
-                Check Out
+                Duplicate
               </StyledButton>
             )}
             {onDelete && (

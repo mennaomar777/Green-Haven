@@ -11,29 +11,63 @@ import Menus from "../../ui/Menus";
 
 const Img = styled.img`
   display: block;
-  width: 6.4rem;
+  width: 6.5rem;
   aspect-ratio: 3 / 2;
   object-fit: cover;
   object-position: center;
   transform: scale(1.5) translateX(-7px);
+  border-radius: var(--border-radius-sm);
+  margin-left: 1.5rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    transform: none;
+    margin: 0 0 0.8rem 0;
+    border-radius: var(--border-radius-md);
+  }
 `;
 
 const Cabin = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--color-grey-600);
+  color: var(--color-grey-800);
   font-family: "Sono";
+
+  [data-theme="dark"] & {
+    color: var(--color-grey-100);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const Price = styled.div`
   font-family: "Sono";
   font-weight: 600;
+  color: var(--color-grey-700);
+
+  [data-theme="dark"] & {
+    color: var(--color-grey-300);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 
 const Discount = styled.div`
   font-family: "Sono";
   font-weight: 500;
   color: var(--color-green-700);
+
+  [data-theme="dark"] & {
+    color: var(--color-green-400);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 
 export default function CabinRow({ cabin }) {
