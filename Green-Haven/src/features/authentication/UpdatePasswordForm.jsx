@@ -4,6 +4,29 @@ import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import useUpdateUser from "./useUpdateUser";
+import styled from "styled-components";
+
+const StyledForm = styled(Form)`
+  max-width: 70rem;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+`;
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
@@ -16,7 +39,7 @@ function UpdatePasswordForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <FormRow
         label="New password (min 8 characters)"
         error={errors?.password?.message}
@@ -52,13 +75,16 @@ function UpdatePasswordForm() {
           })}
         />
       </FormRow>
+
       <FormRow>
-        <Button onClick={reset} type="reset" variation="secondary">
-          Cancel
-        </Button>
-        <Button disabled={isUpdating}>Update password</Button>
+        <ButtonContainer>
+          <Button onClick={reset} type="reset" variation="secondary">
+            Cancel
+          </Button>
+          <Button disabled={isUpdating}>Update password</Button>
+        </ButtonContainer>
       </FormRow>
-    </Form>
+    </StyledForm>
   );
 }
 

@@ -1,4 +1,3 @@
-// features/authentication/UpdateUserDataForm.jsx
 import { useState } from "react";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
@@ -7,6 +6,29 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import useUser from "./useUser";
 import useUpdateUser from "./useUpdateUser";
+import styled from "styled-components";
+
+const StyledForm = styled(Form)`
+  max-width: 70rem;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+`;
 
 function UpdateUserDataForm() {
   const {
@@ -40,7 +62,7 @@ function UpdateUserDataForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <FormRow label="Email address">
         <Input value={email} disabled={isUpdating} />
       </FormRow>
@@ -65,19 +87,21 @@ function UpdateUserDataForm() {
       </FormRow>
 
       <FormRow>
-        <Button
-          type="reset"
-          variation="secondary"
-          disabled={isUpdating}
-          onClick={handleCancel}
-        >
-          Cancel
-        </Button>
-        <Button variation="primary" disabled={isUpdating}>
-          Update account
-        </Button>
+        <ButtonContainer>
+          <Button
+            type="reset"
+            variation="secondary"
+            disabled={isUpdating}
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+          <Button variation="primary" disabled={isUpdating}>
+            Update account
+          </Button>
+        </ButtonContainer>
       </FormRow>
-    </Form>
+    </StyledForm>
   );
 }
 
