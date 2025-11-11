@@ -1,12 +1,13 @@
-// Table.js
 import React, { createContext, useContext } from "react";
 import styled from "styled-components";
 
 const TableContext = createContext();
 
 const StyledTable = styled.div`
-  width: 100%;
+  width: 90%;
+  max-width: 120rem;
   overflow-x: auto;
+  margin: 0 auto;
   border-radius: var(--border-radius-lg);
   background: var(--color-grey-0);
   backdrop-filter: blur(10px);

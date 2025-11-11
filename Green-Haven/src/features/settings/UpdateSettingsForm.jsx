@@ -25,7 +25,13 @@ function UpdateSettingsForm() {
 
   if (isLoading) return <Spinner />;
   return (
-    <Form>
+    <Form
+      style={{
+        maxWidth: "70rem",
+        width: "100%",
+        margin: "0 auto",
+      }}
+    >
       <FormRow label="Minimum nights/booking">
         <Input
           type="number"

@@ -25,7 +25,14 @@ function SignupForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      style={{
+        maxWidth: "70rem",
+        width: "100%",
+        margin: "0 auto",
+      }}
+    >
       <FormRow label="Full name" error={errors?.fullName?.message}>
         <Input
           type="text"
@@ -82,7 +89,6 @@ function SignupForm() {
       </FormRow>
 
       <FormRow>
-        {/* type is an HTML attribute! */}
         <Button
           variation="secondary"
           type="reset"

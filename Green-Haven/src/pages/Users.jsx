@@ -4,7 +4,7 @@ import Row from "../ui/Row";
 
 function NewUsers() {
   return (
-    <Row style={{ flexDirection: "column", gap: "2rem", width: "100%" }}>
+    <Row style={{ flexDirection: "column", gap: "3.2rem", width: "100%" }}>
       <Heading as="h1">Create a new user</Heading>
       <SignupForm />
     </Row>
