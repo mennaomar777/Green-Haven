@@ -39,7 +39,7 @@ It allows hotel staff to manage bookings, guests, rooms, and settings — all in
 
 ## 📁 Project Structure
 
-````bash
+```bash
 src/
 ├── features/
 │   ├── authentication/
@@ -52,7 +52,7 @@ src/
 ├── services/
 ├── ui/
 └── utils/
-
+```
 
 ---
 
@@ -76,7 +76,7 @@ VITE_SUPABASE_KEY=your-supabase-anon-key
 
 # 5. Run the app
 npm run dev
-````
+```
 
 Then open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
