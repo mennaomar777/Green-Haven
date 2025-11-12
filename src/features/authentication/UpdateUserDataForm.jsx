@@ -3,10 +3,10 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
 import useUser from "./useUser";
 import useUpdateUser from "./useUpdateUser";
 import styled from "styled-components";
+import Input from "../../ui/Input";
 
 const StyledForm = styled(Form)`
   max-width: 70rem;
