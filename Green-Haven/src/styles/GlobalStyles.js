@@ -78,11 +78,12 @@ const GlobalStyles = createGlobalStyle`
       --color-grey-900: #FFFFFF;
 
       /* Green (Main Brand) */
-      --color-green-100: #166534;
+      --color-green-100: #e6f4ea;
       --color-green-300: #1B5E20;
       --color-green-500: #2E7D32;
-      --color-green-700: #66BB6A;
+      --color-green-700: #0b8043;
       --color-green-900: #A5D6A7;
+
 
       /* Accent Colors */
       --color-blue-100: #DBEAFE;
