@@ -1,7 +1,7 @@
 # 🌿 Green Haven
 
 **Green Haven** is a modern hotel management dashboard built with React, styled-components, and Supabase.  
-It allows hotel staff to manage bookings, guests, rooms, and settings — all in one elegant and efficient interface.
+It allows hotel staff to manage bookings, guests, cabins, and settings — all in one elegant and efficient interface.
 
 ---
 
