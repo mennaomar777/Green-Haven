@@ -7,7 +7,7 @@ It allows hotel staff to manage bookings, guests, cabins, and settings — all i
 
 ## 🚀 Live Demo
 
-🔗 [View the Live App on Vercel](https://your-vercel-link.vercel.app)
+🔗 [View the Live App on Vercel](https://green-haven-hzrb.vercel.app)
 
 ---
 
