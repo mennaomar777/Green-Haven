@@ -13,7 +13,7 @@ export default function useSignUp() {
     },
     onError: (err) => {
       console.log("ERROR", err);
-      toast.error("");
+      // toast.error("");
     },
   });
   return { signUpMutate, isLoading };
