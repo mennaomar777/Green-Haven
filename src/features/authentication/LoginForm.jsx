@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
-import SpinnerMini from "../../ui/SpinnerMini";
+import Loading from "../../ui/Loading";
 import useLogin from "./useLogin";
 import styled from "styled-components";
 
@@ -100,7 +100,7 @@ function LoginForm() {
       </LoginFormRow>
 
       <LoginButton size="large" disabled={isLoading}>
-        {!isLoading ? "Log in to your account" : <SpinnerMini />}
+        {!isLoading ? "Log in to your account" : <Loading small label="Signing in…" />}
       </LoginButton>
     </StyledForm>
   );

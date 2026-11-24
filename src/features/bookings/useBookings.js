@@ -7,11 +7,12 @@ export default function useBookings() {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
+  const status = searchParams.get("status") || "all";
+  const sort = searchParams.get("sort") || "startDate-desc";
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ["bookings", currentPage],
-    queryFn: () => getBookings(currentPage, 10),
-    keepPreviousData: true,
+    queryKey: ["bookings", currentPage, status, sort],
+    queryFn: () => getBookings(currentPage, 10, status, sort),
   });
 
   const pageCount = Math.ceil((data?.count || 0) / 10);
@@ -20,20 +21,18 @@ export default function useBookings() {
   useEffect(() => {
     if (currentPage < pageCount) {
       queryClient.prefetchQuery({
-        queryKey: ["bookings", currentPage + 1],
-        queryFn: () => getBookings(currentPage + 1, 10),
-        keepPreviousData: true,
+        queryKey: ["bookings", currentPage + 1, status, sort],
+        queryFn: () => getBookings(currentPage + 1, 10, status, sort),
       });
     }
 
     if (currentPage > 1) {
       queryClient.prefetchQuery({
-        queryKey: ["bookings", currentPage - 1],
-        queryFn: () => getBookings(currentPage - 1, 10),
-        keepPreviousData: true,
+        queryKey: ["bookings", currentPage - 1, status, sort],
+        queryFn: () => getBookings(currentPage - 1, 10, status, sort),
       });
     }
-  }, [currentPage, pageCount, queryClient]);
+  }, [currentPage, pageCount, queryClient, status, sort]);
 
   return {
     bookings: data?.bookings || [],

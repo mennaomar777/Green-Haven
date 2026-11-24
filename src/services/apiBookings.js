@@ -1,22 +1,30 @@
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
-export async function getBookings(page = 1, pageSize = 10) {
+export async function getBookings(
+  page = 1,
+  pageSize = 10,
+  status = "all",
+  sort = "startDate-desc"
+) {
   const from = (page - 1) * pageSize;
   const to = page * pageSize - 1;
+  const [sortColumn, sortDirection] = sort.split("-");
+  const sortField = sortColumn === "totalPrice" ? "totalPrice" : "startDate";
 
-  const {
-    data: bookings,
-    error,
-    count,
-  } = await supabase
+  let query = supabase
     .from("bookings")
-    .select("*,cabins(name),guests(fullName,email)", { count: "exact" })
+    .select("*,cabins(name),guests(fullName,email)", { count: "exact" });
+
+  if (status !== "all") query = query.eq("status", status);
+
+  const { data: bookings, error, count } = await query
+    .order(sortField, { ascending: sortDirection === "asc" })
     .range(from, to);
 
   if (error) {
     console.error(error);
-    throw new Error("Cabins could not be loaded");
+    throw new Error("Bookings could not be loaded");
   }
   return { bookings, count };
 }
@@ -70,12 +78,13 @@ export async function getStaysAfterDate(date) {
 
 // Activity includes today's arrivals, current stays, and today's departures.
 export async function getStaysTodayActivity() {
-  const today = getToday();
+  const todayStart = getToday();
+  const todayEnd = getToday({ end: true });
   const { data, error } = await supabase
     .from("bookings")
     .select("*, guests(fullName, nationality, countryFlag)")
     .or(
-      `and(status.eq.unconfirmed,startDate.eq.${today}),and(status.eq.checked-in,startDate.lte.${today},endDate.gte.${today})`
+      `and(status.eq.unconfirmed,startDate.gte.${todayStart},startDate.lte.${todayEnd}),and(status.eq.checked-in,startDate.lte.${todayEnd},endDate.gte.${todayStart})`
     )
     .order("created_at");
 

@@ -9,7 +9,7 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import Spinner from "../../ui/Spinner";
+import Loading from "../../ui/Loading";
 import Empty from "../../ui/Empty";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
@@ -42,7 +42,7 @@ function BookingDetail() {
   const { deleteBookingMutate, isDeleting } = useDeleteBooking();
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Loading label="Loading booking…" />;
   if (!booking) return <Empty resourceName="booking" />;
 
   const { id: bookingId, status } = booking;

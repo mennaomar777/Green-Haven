@@ -1,10 +1,18 @@
 import React from "react";
-import Spinner from "../../ui/Spinner";
+import Loading from "../../ui/Loading";
 import CabinRow from "./CabinRow";
 import useCabins from "./useCabins";
 import Table from "../../ui/Table";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
+import styled from "styled-components";
+
+const LoadError = styled.p`
+  padding: 2rem;
+  color: var(--color-red-700);
+  background: var(--color-red-100);
+  border-radius: var(--border-radius-md);
+`;
 
 export default function CabinTable() {
   const { cabins = [], isLoading, error } = useCabins();
@@ -12,9 +20,9 @@ export default function CabinTable() {
   const filterValue = searchParams.get("discount") || "all";
   const sortValue = searchParams.get("sort") || "name-asc";
 
-  if (!cabins.length) {
-    return <Empty resource="cabins" />;
-  }
+  if (isLoading) return <Loading label="Loading cabins…" />;
+  if (error) return <LoadError>Cabins could not be loaded. Please try again.</LoadError>;
+  if (!cabins.length) return <Empty resource="cabins" />;
 
   // filter
   let filteredCabins = cabins;
@@ -37,9 +45,6 @@ export default function CabinTable() {
     sortedCabins.sort((a, b) => a.maxCapacity - b.maxCapacity);
   if (sortValue === "maxCapacity-desc")
     sortedCabins.sort((a, b) => b.maxCapacity - a.maxCapacity);
-
-  if (isLoading) return <Spinner />;
-  if (error) return <div>error!!</div>;
 
   return (
     <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">

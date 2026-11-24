@@ -8,17 +8,22 @@ const StyledAppLayout = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   background-color: var(--color-grey-50);
 `;
 
 const Main = styled.main`
   flex: 1;
   background-color: var(--color-grey-50);
-  padding: 4rem 4.8rem 6.4rem;
+  padding: 4rem clamp(1.6rem, 4vw, 4.8rem) 6.4rem;
   overflow-y: auto;
   transition: filter 0.3s ease;
   filter: ${(props) => (props.$isSidebarOpen ? "blur(6px)" : "none")};
   pointer-events: ${(props) => (props.$isSidebarOpen ? "none" : "auto")};
+
+  @media (max-width: 640px) {
+    padding: 2rem 1.2rem 3.2rem;
+  }
 `;
 
 const Container = styled.div`
@@ -27,6 +32,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+
+  @media (max-width: 640px) {
+    gap: 2rem;
+  }
 `;
 
 const Overlay = styled.div`

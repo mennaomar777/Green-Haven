@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import Row from "../../ui/Row";
 import useTodayActivity from "./useTodayActivity";
-import Spinner from "../../ui/Spinner";
+import Loading from "../../ui/Loading";
 import TodayItem from "./TodayItem";
 
 const StyledToday = styled.div`
@@ -22,8 +22,8 @@ const StyledToday = styled.div`
 
   @media (max-width: 640px) {
     grid-column: 1 / -1;
-    padding: 2rem;
-    gap: 1.6rem;
+    padding: 1.6rem 1.4rem;
+    gap: 1.2rem;
   }
 `;
 
@@ -53,7 +53,7 @@ export default function TodayActivity() {
         <Heading as="h2">Today</Heading>
       </Row>
       {isLoading ? (
-        <Spinner />
+        <Loading label="Loading today’s activity…" minHeight="16rem" />
       ) : activities?.length > 0 ? (
         <TodayList>
           {activities.map((activity) => (

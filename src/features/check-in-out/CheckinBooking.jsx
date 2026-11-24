@@ -9,7 +9,7 @@ import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 import useBooking from "../bookings/useBooking";
-import Spinner from "../../ui/Spinner";
+import Loading from "../../ui/Loading";
 import { useEffect, useState } from "react";
 import Checkbox from "../../ui/Checkbox";
 import { formatCurrency } from "../../utils/helpers";
@@ -36,7 +36,8 @@ function CheckinBooking() {
     setConfirmPaid(booking?.isPaid ?? false);
   }, [booking]);
 
-  if (isLoading || isLoadingSettings) return <Spinner />;
+  if (isLoading || isLoadingSettings)
+    return <Loading label="Loading check-in details…" />;
   const {
     id: bookingId,
     guests,

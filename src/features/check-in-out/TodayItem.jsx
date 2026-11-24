@@ -7,9 +7,10 @@ import CheckoutButton from "./CheckoutButton";
 import { isToday } from "date-fns";
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
+  grid-template-columns: 8.5rem 2rem minmax(8rem, 1fr) auto auto;
   gap: 1.2rem;
   align-items: center;
+  min-width: 0;
 
   font-size: 1.4rem;
   padding: 0.8rem 0;
@@ -18,10 +19,37 @@ const StyledTodayItem = styled.li`
   &:first-child {
     border-top: 1px solid var(--color-grey-100);
   }
+
+  @media (max-width: 760px) {
+    grid-template-columns: auto 2rem minmax(0, 1fr) auto;
+    gap: 0.8rem;
+    padding: 1rem 0;
+    & > :nth-child(1) { grid-column: 1; grid-row: 1 / span 2; }
+    & > :nth-child(2) { grid-column: 2; grid-row: 1 / span 2; }
+    & > :nth-child(3) { grid-column: 3; grid-row: 1; }
+    & > :nth-child(4) { grid-column: 3; grid-row: 2; }
+    & > a, & > button { grid-column: 4; grid-row: 1 / span 2; }
+  }
+
+  @media (max-width: 420px) {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    & > :nth-child(2) { display: none; }
+    & > :nth-child(1) { grid-column: 1; grid-row: 1 / span 2; }
+    & > :nth-child(3) { grid-column: 2; grid-row: 1; }
+    & > :nth-child(4) { grid-column: 2; grid-row: 2; }
+    & > a, & > button {
+      grid-column: 3;
+      grid-row: 1 / span 2;
+      justify-self: end;
+      white-space: nowrap;
+    }
+  }
 `;
 
 const Guest = styled.div`
   font-weight: 500;
+  min-width: 0;
+  overflow-wrap: anywhere;
 `;
 
 export default function TodayItem({ activity }) {

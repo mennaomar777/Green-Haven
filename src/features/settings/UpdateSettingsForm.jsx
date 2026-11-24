@@ -1,7 +1,7 @@
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import Spinner from "../../ui/Spinner";
+import Loading from "../../ui/Loading";
 import useEditSettings from "./useEditSettings";
 import useSetting from "./useSetting";
 import styled from "styled-components";
@@ -75,7 +75,7 @@ function UpdateSettingsForm() {
     updateSettingsMutate({ [field]: e.target.value });
   }
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Loading label="Loading settings…" />;
   return (
     <SettingsFormCard>
       <SettingsField label="Minimum nights per booking">

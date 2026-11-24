@@ -2,36 +2,22 @@ import BookingRow from "./BookingRow";
 import Table from "../../ui/Table";
 import Empty from "../../ui/Empty";
 import useBookings from "./useBookings";
-import Spinner from "../../ui/Spinner";
-import { useSearchParams } from "react-router-dom";
+import Loading from "../../ui/Loading";
 import Pagination from "../../ui/Pagination";
+import styled from "styled-components";
+
+const LoadError = styled.p`
+  padding: 2rem;
+  color: var(--color-red-700);
+  background: var(--color-red-100);
+  border-radius: var(--border-radius-md);
+`;
 
 function BookingTable() {
   const { bookings = [], isLoading, error, count } = useBookings();
-  const [searchParams] = useSearchParams();
-  const filterValue = searchParams.get("status") || "all";
-  const sortedValue = searchParams.get("sort") || "startDate-desc";
-
-  if (isLoading) return <Spinner />;
-  if (error) console.log(error);
+  if (isLoading) return <Loading label="Loading bookings…" />;
+  if (error) return <LoadError>Bookings could not be loaded. Please try again.</LoadError>;
   if (!bookings.length) return <Empty resource="bookings" />;
-
-  // Filter
-  const filteredBookings =
-    filterValue === "all"
-      ? bookings
-      : bookings.filter((b) => b.status === filterValue);
-
-  // Sort
-  const sortedBookings = [...filteredBookings].sort((a, b) => {
-    if (sortedValue === "startDate-desc")
-      return new Date(b.startDate) - new Date(a.startDate);
-    if (sortedValue === "startDate-asc")
-      return new Date(a.startDate) - new Date(b.startDate);
-    if (sortedValue === "totalPrice-desc") return b.totalPrice - a.totalPrice;
-    if (sortedValue === "totalPrice-asc") return a.totalPrice - b.totalPrice;
-    return 0;
-  });
 
   return (
     <Table columns="0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem">
@@ -45,7 +31,7 @@ function BookingTable() {
       </Table.Header>
 
       <Table.Body
-        data={sortedBookings}
+        data={bookings}
         render={(booking) => <BookingRow key={booking.id} booking={booking} />}
       />
 

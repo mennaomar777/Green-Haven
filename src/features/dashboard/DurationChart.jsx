@@ -27,7 +27,7 @@ const ChartBox = styled.div`
 
   @media (max-width: 640px) {
     grid-column: 1 / -1;
-    padding: 1.8rem 1.2rem;
+    padding: 1.8rem 1.4rem;
   }
 
   & > *:first-child {
@@ -190,7 +190,7 @@ function DurationChart({ confirmedStays }) {
               dataKey="value"
               innerRadius={65}
               outerRadius={89}
-              cx="40%"
+              cx="38%"
               cy="50%"
               paddingAngle={3}
             >
@@ -206,10 +206,11 @@ function DurationChart({ confirmedStays }) {
             <Legend
               verticalAlign="middle"
               align="right"
-              width="35%"
+              width="38%"
               layout="vertical"
               iconSize={7}
               iconType="circle"
+              wrapperStyle={{ fontSize: "1.2rem" }}
             />
           </PieChart>
         </ResponsiveContainer>

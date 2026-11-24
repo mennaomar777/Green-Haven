@@ -17,7 +17,7 @@ const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
 
   @media (max-width: 640px) {
-    padding: 1.8rem 1.2rem;
+    padding: 1.8rem 1.4rem;
     gap: 1.6rem;
   }
 
@@ -70,13 +70,16 @@ export default function SalesChart({ bookings, numDays }) {
         <AreaChart data={data}>
           <XAxis
             dataKey="label"
-            tick={{ fill: colors.text }}
+            tick={{ fill: colors.text, fontSize: 11 }}
             tickLine={{ stroke: colors.text }}
+            minTickGap={12}
           />
           <YAxis
-            width="auto"
-            unit="$"
-            tick={{ fill: colors.text }}
+            width={56}
+            tickFormatter={(value) =>
+              value >= 1000 ? `$${Math.round(value / 1000)}k` : `$${value}`
+            }
+            tick={{ fill: colors.text, fontSize: 11 }}
             tickLine={{ stroke: colors.text }}
           />
           <CartesianGrid strokeDasharray="3 3" />

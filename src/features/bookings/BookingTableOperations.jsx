@@ -107,6 +107,7 @@ export default function BookingTableOperations() {
 
   const handleSort = (value) => {
     searchParams.set("sort", value);
+    searchParams.set("page", 1);
     setSearchParams(searchParams);
   };
 
