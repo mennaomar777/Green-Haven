@@ -4,6 +4,7 @@ const StyledStat = styled.div`
   /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
+  border-top: 3px solid var(--color-${(props) => props.color}-500);
   border-radius: var(--border-radius-md);
 
   padding: 1.6rem;
@@ -12,6 +13,8 @@ const StyledStat = styled.div`
   grid-template-rows: auto auto;
   column-gap: 1.6rem;
   row-gap: 0.4rem;
+  min-width: 0;
+  box-shadow: var(--shadow-sm);
 `;
 
 const Icon = styled.div`
@@ -42,9 +45,10 @@ const Title = styled.h5`
 `;
 
 const Value = styled.p`
-  font-size: 2.4rem;
+  font-size: clamp(2rem, 2.4vw, 2.6rem);
   line-height: 1;
-  font-weight: 500;
+  font-weight: 600;
+  overflow-wrap: anywhere;
 `;
 
 function Stat({ icon, title, value, color }) {

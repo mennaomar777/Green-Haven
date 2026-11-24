@@ -7,6 +7,12 @@ const TableOperations = styled.div`
   gap: 1.6rem;
   flex-wrap: wrap;
   margin-bottom: 1.6rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 0;
+    gap: 0.8rem;
+  }
 `;
 
 const StyledFilter = styled.div`
@@ -18,6 +24,17 @@ const StyledFilter = styled.div`
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
+  max-width: 100%;
+
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 `;
 
 const FilterButton = styled.button`
@@ -29,6 +46,7 @@ const FilterButton = styled.button`
   padding: 0.44rem 0.8rem;
   cursor: pointer;
   transition: all 0.3s;
+  white-space: nowrap;
 
   ${(props) =>
     props.active &&
@@ -41,6 +59,19 @@ const FilterButton = styled.button`
     background-color: var(--color-brand-600);
     color: var(--color-brand-50);
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.15rem;
+    padding: 0.65rem 0.35rem;
+    white-space: normal;
+    line-height: 1.25;
+    min-height: 3.8rem;
+  }
 `;
 
 const Select = styled.select`
@@ -51,6 +82,16 @@ const Select = styled.select`
   cursor: pointer;
   background-color: var(--color-grey-0);
   color: var(--color-grey-700);
+  max-width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export default function BookingTableOperations() {

@@ -15,9 +15,20 @@ const ChartBox = styled.div`
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
 
   padding: 2.4rem 3.2rem;
   grid-column: 3 / span 2;
+
+  @media (max-width: 1100px) {
+    grid-column: auto;
+    padding: 2rem;
+  }
+
+  @media (max-width: 640px) {
+    grid-column: 1 / -1;
+    padding: 1.8rem 1.2rem;
+  }
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -25,6 +36,25 @@ const ChartBox = styled.div`
 
   & .recharts-pie-label-text {
     font-weight: 600;
+  }
+
+  & .recharts-legend-item-text {
+    color: var(--color-grey-700) !important;
+    font-size: 1.2rem;
+  }
+`;
+
+const EmptyState = styled.div`
+  min-height: 24rem;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  color: var(--color-grey-500);
+  font-size: 1.5rem;
+  text-align: center;
+
+  [data-theme="dark"] & {
+    color: var(--color-grey-300);
   }
 `;
 
@@ -130,8 +160,8 @@ function prepareData(startData, stays) {
       if ([4, 5].includes(num)) return incArrayValue(arr, "4-5 nights");
       if ([6, 7].includes(num)) return incArrayValue(arr, "6-7 nights");
       if (num >= 8 && num <= 14) return incArrayValue(arr, "8-14 nights");
+      if (num > 21) return incArrayValue(arr, "21+ nights");
       if (num >= 15 && num <= 21) return incArrayValue(arr, "15-21 nights");
-      if (num >= 21) return incArrayValue(arr, "21+ nights");
       return arr;
     }, startData)
     .filter((obj) => obj.value > 0);
@@ -147,37 +177,43 @@ function DurationChart({ confirmedStays }) {
   return (
     <ChartBox>
       <Heading as="h2">Stay duration summary</Heading>
-      <ResponsiveContainer width="100%" height={240}>
-        <PieChart>
-          <Pie
-            data={data}
-            nameKey="duration"
-            dataKey="value"
-            innerRadius={65}
-            outerRadius={89}
-            cx="40%"
-            cy="50%"
-            paddingAngle={3}
-          >
-            {data.map((entry) => (
-              <Cell
-                fill={entry.color}
-                stroke={entry.color}
-                key={entry.duration}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend
-            verticalAlign="middle"
-            align="right"
-            width="35%"
-            layout="vertical"
-            iconSize={7}
-            iconType="circle"
-          />
-        </PieChart>
-      </ResponsiveContainer>
+      {data.length === 0 ? (
+        <EmptyState>
+          No stay data available for the selected period.
+        </EmptyState>
+      ) : (
+        <ResponsiveContainer width="100%" height={240}>
+          <PieChart>
+            <Pie
+              data={data}
+              nameKey="duration"
+              dataKey="value"
+              innerRadius={65}
+              outerRadius={89}
+              cx="40%"
+              cy="50%"
+              paddingAngle={3}
+            >
+              {data.map((entry) => (
+                <Cell
+                  fill={entry.color}
+                  stroke={entry.color}
+                  key={entry.duration}
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend
+              verticalAlign="middle"
+              align="right"
+              width="35%"
+              layout="vertical"
+              iconSize={7}
+              iconType="circle"
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      )}
     </ChartBox>
   );
 }

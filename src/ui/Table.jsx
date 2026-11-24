@@ -4,10 +4,10 @@ import styled from "styled-components";
 const TableContext = createContext();
 
 const StyledTable = styled.div`
-  width: 90%;
+  width: 100%;
   max-width: 120rem;
   overflow-x: auto;
-  margin: 0 auto;
+  margin: 0;
   border-radius: var(--border-radius-lg);
   background: var(--color-grey-0);
   backdrop-filter: blur(10px);
@@ -28,10 +28,12 @@ const CommonRow = styled.div`
   column-gap: 2.4rem;
   align-items: center;
   transition: all 0.3s ease;
+  min-width: 76rem;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     row-gap: 1rem;
+    min-width: 0;
   }
 `;
 
@@ -73,13 +75,23 @@ const StyledRow = styled(CommonRow)`
     display: flex !important;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.8rem;
-    padding: 1rem;
-    margin: 1rem 0;
+    gap: 1rem;
+    padding: 1.4rem;
+    margin: 0;
     border: 1px solid var(--color-grey-200);
     border-radius: var(--border-radius-md);
-    background-color: var(--color-grey-50);
+    background-color: var(--color-grey-0);
     box-shadow: var(--shadow-sm);
+    overflow-wrap: anywhere;
+    position: relative;
+
+    & > * { max-width: 100%; }
+    & > *:last-child {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 1;
+    }
   }
 
   [data-theme="dark"] & {
@@ -99,6 +111,12 @@ const StyledRow = styled(CommonRow)`
 
 const StyledBody = styled.section`
   margin: 0.4rem 0;
+
+  @media (max-width: 768px) {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+  }
 `;
 
 const Footer = styled.footer`

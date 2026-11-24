@@ -1,30 +1,32 @@
 import UpdatePasswordForm from "../features/authentication/UpdatePasswordForm";
 import UpdateUserDataForm from "../features/authentication/UpdateUserDataForm";
 import Heading from "../ui/Heading";
-import Row from "../ui/Row";
 import styled from "styled-components";
 
 const AccountContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
-  padding: 2rem;
+  gap: 2.8rem;
+  width: min(100%, 82rem);
+  margin: 0 auto;
+  padding: 0.8rem 1.6rem 3.2rem;
 
   @media (max-width: 768px) {
-    gap: 2.4rem;
-    padding: 1rem;
+    gap: 2rem;
+    padding: 0 1rem 2rem;
   }
 
   @media (max-width: 480px) {
-    gap: 2rem;
-    padding: 0.5rem;
+    gap: 1.6rem;
+    padding-inline: 0;
   }
 `;
 
 const FormSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.2rem;
+  padding-top: 0.4rem;
 
   @media (max-width: 768px) {
     gap: 1.6rem;
@@ -32,20 +34,13 @@ const FormSection = styled.div`
 `;
 
 const SectionHeading = styled(Heading)`
-  text-align: center;
+  text-align: left;
   width: 100%;
 
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.8rem;
-  }
 `;
 
 const MainHeading = styled(Heading)`
-  text-align: center;
+  text-align: left;
   color: var(--color-green-700);
   width: 100%;
 
@@ -53,13 +48,6 @@ const MainHeading = styled(Heading)`
     color: var(--color-green-400);
   }
 
-  @media (max-width: 768px) {
-    font-size: 2.4rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 2rem;
-  }
 `;
 
 function Account() {

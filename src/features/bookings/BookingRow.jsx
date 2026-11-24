@@ -16,6 +16,10 @@ const Cabin = styled.div`
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: "Sono";
+
+  @media (max-width: 768px) {
+    font-size: 1.7rem;
+  }
 `;
 
 const Stacked = styled.div`
@@ -28,16 +32,20 @@ const Stacked = styled.div`
   & span:last-child {
     color: var(--color-grey-500);
     font-size: 1.2rem;
+    overflow-wrap: anywhere;
   }
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
+    width: 100%;
+    line-height: 1.45;
   }
 `;
 
 const Amount = styled.div`
   font-family: "Sono";
   font-weight: 500;
+  white-space: nowrap;
 `;
 
 function BookingRow({ booking }) {
@@ -62,6 +70,7 @@ function BookingRow({ booking }) {
     "checked-in": "green",
     "checked-out": "silver",
   };
+  const displayStatus = status || "unknown";
 
   return (
     <Table.Row>
@@ -82,7 +91,9 @@ function BookingRow({ booking }) {
           {format(new Date(endDate), "MMM dd yyyy")}
         </span>
       </Stacked>
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      <Tag type={statusToTagName[status] || "silver"}>
+        {displayStatus.replaceAll("-", " ")}
+      </Tag>
       <Amount>{formatCurrency(totalPrice)}</Amount>
       <MenusBookings
         seeDetails={() => navigate(`/bookings/${bookingId}`)}

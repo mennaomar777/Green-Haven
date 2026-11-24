@@ -4,6 +4,7 @@ import { Flag } from "../../ui/Flag";
 import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 import CheckoutButton from "./CheckoutButton";
+import { isToday } from "date-fns";
 const StyledTodayItem = styled.li`
   display: grid;
   grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
@@ -27,7 +28,11 @@ export default function TodayItem({ activity }) {
   return (
     <StyledTodayItem>
       {activity.status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
-      {activity.status === "checked-in" && <Tag type="blue">Departing</Tag>}
+      {activity.status === "checked-in" && (
+        <Tag type="blue">
+          {isToday(new Date(activity.endDate)) ? "Departing" : "In house"}
+        </Tag>
+      )}
       <Flag
         src={activity.guests.countryFlag}
         alt={`Flag of ${activity.guests.country}`}
@@ -44,9 +49,10 @@ export default function TodayItem({ activity }) {
           Check in
         </Button>
       )}
-      {activity.status === "checked-in" && (
-        <CheckoutButton bookingId={activity.id} />
-      )}
+      {activity.status === "checked-in" &&
+        isToday(new Date(activity.endDate)) && (
+          <CheckoutButton bookingId={activity.id} />
+        )}
     </StyledTodayItem>
   );
 }

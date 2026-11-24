@@ -12,6 +12,8 @@ const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  padding: 0;
+  list-style: none;
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -19,13 +21,14 @@ const StyledNavLink = styled(NavLink)`
   &:visited {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.4rem;
 
     color: var(--color-grey-600);
     font-size: 1.6rem;
     font-weight: 500;
-    padding: 1.2rem 2.4rem;
-    transition: all 0.3s;
+    padding: 1.2rem 1.6rem;
+    border-radius: var(--border-radius-sm);
+    transition: color 0.2s ease, background-color 0.2s ease;
   }
 
   &:hover,
@@ -35,6 +38,29 @@ const StyledNavLink = styled(NavLink)`
     color: var(--color-grey-800);
     background-color: var(--color-grey-50);
     border-radius: var(--border-radius-sm);
+  }
+
+  &.active:link, &.active:visited {
+    background-color: var(--color-green-100);
+    color: var(--color-green-800);
+    box-shadow: inset 3px 0 0 var(--color-brand-600);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  .dark-mode &.active:link, .dark-mode &.active:visited {
+    background-color: rgba(78, 173, 105, 0.16);
+    color: #b8e3c2;
+    box-shadow: inset 3px 0 0 #69c781;
+  }
+
+  .dark-mode &:hover,
+  .dark-mode &:active {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #edf4ee;
   }
 
   & svg {
@@ -50,6 +76,10 @@ const StyledNavLink = styled(NavLink)`
   &.active:visited svg {
     color: var(--color-brand-600);
   }
+
+  .dark-mode & svg { color: #91a596; }
+  .dark-mode &:hover svg,
+  .dark-mode &.active svg { color: #83d498; }
 `;
 
 export default function MainNav({ onNavClick }) {

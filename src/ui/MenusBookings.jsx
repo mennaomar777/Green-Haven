@@ -7,6 +7,7 @@ import {
   HiEye,
   HiTrash,
 } from "react-icons/hi2";
+import { HiEllipsisVertical } from "react-icons/hi2";
 
 const StyledMenu = styled.div`
   display: flex;
@@ -16,21 +17,39 @@ const StyledMenu = styled.div`
 `;
 
 const StyledToggle = styled.button`
-  background: none;
-  border: none;
-  padding: 0.2rem 0.9rem;
-  border-radius: var(--border-radius-sm);
-  transition: all 0.2s;
-  font-size: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background: var(--color-grey-0);
+  border: 1px solid var(--color-grey-200);
+  padding: 0;
+  border-radius: 1rem;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  color: var(--color-grey-700);
+  cursor: pointer;
 
-  &:hover {
+  &:hover, &:focus-visible {
     background-color: var(--color-grey-100);
+    border-color: var(--color-grey-300);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
   }
 
   & svg {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2rem;
+    height: 2rem;
     color: var(--color-grey-700);
+  }
+
+  @media (max-width: 768px) {
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 1.2rem;
   }
 `;
 
@@ -98,8 +117,14 @@ export default function MenusBookings({
 
   return (
     <StyledMenu ref={ref}>
-      <StyledToggle ref={toggleRef} onClick={handleToggle}>
-        ⋮
+      <StyledToggle
+        ref={toggleRef}
+        onClick={handleToggle}
+        aria-label="Booking actions"
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        <HiEllipsisVertical aria-hidden="true" />
       </StyledToggle>
 
       {open &&

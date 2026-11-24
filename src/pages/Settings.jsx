@@ -1,27 +1,28 @@
 import UpdateSettingsForm from "../features/settings/UpdateSettingsForm";
 import Heading from "../ui/Heading";
-import Row from "../ui/Row";
 import styled from "styled-components";
 
 const SettingsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
-  padding: 2rem;
+  gap: 2.4rem;
+  width: min(100%, 82rem);
+  margin: 0 auto;
+  padding: 0.8rem 1.6rem 3.2rem;
 
   @media (max-width: 768px) {
-    gap: 2.4rem;
-    padding: 1rem;
+    gap: 1.8rem;
+    padding: 0 1rem 2rem;
   }
 
   @media (max-width: 480px) {
-    gap: 2rem;
-    padding: 0.5rem;
+    gap: 1.4rem;
+    padding-inline: 0;
   }
 `;
 
 const MainHeading = styled(Heading)`
-  text-align: center;
+  text-align: left;
   color: var(--color-green-700);
   width: 100%;
 
@@ -29,19 +30,22 @@ const MainHeading = styled(Heading)`
     color: var(--color-green-400);
   }
 
-  @media (max-width: 768px) {
-    font-size: 2.4rem;
-  }
+`;
 
-  @media (max-width: 480px) {
-    font-size: 2rem;
-  }
+const Intro = styled.p`
+  margin-top: -1.6rem;
+  color: var(--color-grey-600);
+  font-size: 1.5rem;
+
+  [data-theme="dark"] & { color: var(--color-grey-300); }
+  @media (max-width: 768px) { margin-top: -1rem; }
 `;
 
 function Settings() {
   return (
     <SettingsContainer>
       <MainHeading as="h1">Update hotel settings</MainHeading>
+      <Intro>Manage the booking limits and rates used across your property.</Intro>
       <UpdateSettingsForm />
     </SettingsContainer>
   );

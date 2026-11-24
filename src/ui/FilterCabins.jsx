@@ -10,6 +10,7 @@ const StyledFilter = styled.div`
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
+
 `;
 
 const FilterButton = styled.button`
@@ -21,7 +22,6 @@ const FilterButton = styled.button`
   padding: 0.44rem 0.8rem;
   cursor: pointer;
   transition: all 0.3s;
-
   ${(props) =>
     props.active &&
     css`

@@ -1,40 +1,45 @@
 import SignupForm from "../features/authentication/SignupForm";
 import Heading from "../ui/Heading";
-import Row from "../ui/Row";
 import styled from "styled-components";
 
 const NewUsersContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
-  padding: 2rem;
+  gap: 2.4rem;
+  width: min(100%, 82rem);
+  margin: 0 auto;
+  padding: 0.8rem 1.6rem 3.2rem;
 
   @media (max-width: 768px) {
-    gap: 2.4rem;
-    padding: 1rem;
+    gap: 1.8rem;
+    padding: 0 1rem 2rem;
   }
 
   @media (max-width: 480px) {
-    gap: 2rem;
-    padding: 0.5rem;
+    gap: 1.4rem;
+    padding-inline: 0;
   }
 `;
 
 const MainHeading = styled(Heading)`
-  text-align: center;
+  text-align: left;
   color: var(--color-green-700);
   width: 100%;
 
   [data-theme="dark"] & {
     color: var(--color-green-400);
   }
+`;
+
+const Intro = styled.p`
+  margin-top: -1.6rem;
+  color: var(--color-grey-600);
+  font-size: 1.5rem;
+
+  [data-theme="dark"] & { color: var(--color-grey-300); }
 
   @media (max-width: 768px) {
-    font-size: 2.4rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 2rem;
+    margin-top: -1rem;
   }
 `;
 
@@ -42,6 +47,7 @@ function NewUsers() {
   return (
     <NewUsersContainer>
       <MainHeading as="h1">Create a new user</MainHeading>
+      <Intro>Add an account for a team member to access Green Haven.</Intro>
       <SignupForm />
     </NewUsersContainer>
   );
